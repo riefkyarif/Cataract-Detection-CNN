@@ -96,3 +96,17 @@ plt.tight_layout()
 x = np.array([i[0] for i in dataset]).reshape(-1,image_size,image_size,3)
 y = np.array([i[1] for i in dataset])
 ###################################################################################################
+
+# Data Augmentation
+
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
+# create a data generator
+datagen = ImageDataGenerator(
+        samplewise_center=True,  # set each sample mean to 0
+        rotation_range=10,  # randomly rotate images in the range (degrees, 0 to 180)
+        zoom_range = 0.1, # Randomly zoom image 
+        width_shift_range=0.1,  # randomly shift images horizontally (fraction of total width)
+        height_shift_range=0.1,  # randomly shift images vertically (fraction of total height)
+        horizontal_flip=True,  # randomly flip images
+        vertical_flip=False) # we don't expect Bo to be upside-down so we will not flip vertically
+
