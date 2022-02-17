@@ -124,3 +124,7 @@ for i in range(batch_size):
     image = x[i]
     ax.flatten()[i].imshow(np.squeeze(image))
 plt.show()
+
+datagen.fit(x_train)
+####################################################################################################
+
