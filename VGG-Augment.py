@@ -53,3 +53,46 @@ normal = np.concatenate((left_normal,right_normal),axis=0)
 print(len(cataract),len(normal))
 
 #####################################################################################################
+from tensorflow.keras.preprocessing.image import load_img,img_to_array
+dataset_dir = "/content/my_data/preprocessed_images"
+image_size=224
+labels = []
+dataset = []
+def create_dataset(image_category,label):
+    for img in tqdm(image_category):
+        image_path = os.path.join(dataset_dir,img)
+        try:
+            image = cv2.imread(image_path,cv2.IMREAD_COLOR)
+            image = cv2.resize(image,(image_size,image_size))   
+        except:
+            continue
+        
+        dataset.append([np.array(image),np.array(label)])
+    random.shuffle(dataset)
+    return dataset
+
+dataset = create_dataset(cataract,1)
+
+len(dataset)
+
+dataset = create_dataset(normal,0)
+
+len(dataset)
+
+plt.figure(figsize=(12,7))
+for i in range(10):
+    sample = random.choice(range(len(dataset)))
+    image = dataset[sample][0]
+    category = dataset[sample][1]
+    if category== 0:
+        label = "Normal"
+    else:
+        label = "Cataract"
+    plt.subplot(2,5,i+1)
+    plt.imshow(image)
+    plt.xlabel(label)
+plt.tight_layout()  
+
+x = np.array([i[0] for i in dataset]).reshape(-1,image_size,image_size,3)
+y = np.array([i[1] for i in dataset])
+###################################################################################################
