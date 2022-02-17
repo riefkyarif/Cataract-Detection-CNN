@@ -110,3 +110,17 @@ datagen = ImageDataGenerator(
         horizontal_flip=True,  # randomly flip images
         vertical_flip=False) # we don't expect Bo to be upside-down so we will not flip vertically
 
+from sklearn.model_selection import train_test_split
+x_train,x_test,y_train,y_test = train_test_split(x,y,test_size=0.2, random_state=42,stratify=y)
+
+import matplotlib.pyplot as plt
+import numpy as np
+batch_size = 32
+img_iter = datagen.flow(x_train, y_train, batch_size=batch_size)
+
+x, y = img_iter.next()
+fig, ax = plt.subplots(nrows=4, ncols=8)
+for i in range(batch_size):
+    image = x[i]
+    ax.flatten()[i].imshow(np.squeeze(image))
+plt.show()
