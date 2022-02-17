@@ -25,5 +25,17 @@ for dirname, _, filenames in os.walk('/content/my_data'):
 df = pd.read_csv("/content/my_data/full_df.csv")
 df.head()
 
+def has_cataract(text):
+    if "cataract" in text:
+        return 1
+    else:
+        return 0
+df["left_cataract"] = df["Left-Diagnostic Keywords"].apply(lambda x: has_cataract(x))
+df["right_cataract"] = df["Right-Diagnostic Keywords"].apply(lambda x: has_cataract(x))
+
+left_cataract = df.loc[(df.C ==1) & (df.left_cataract == 1)]["Left-Fundus"].values
+print(len(left_cataract))
+right_cataract = df.loc[(df.C ==1) & (df.right_cataract == 1)]["Right-Fundus"].values
+print(len(right_cataract))
 #######################################################################################################
 
