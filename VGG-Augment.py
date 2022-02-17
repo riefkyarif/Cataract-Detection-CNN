@@ -25,6 +25,7 @@ for dirname, _, filenames in os.walk('/content/my_data'):
 df = pd.read_csv("/content/my_data/full_df.csv")
 df.head()
 
+#######################################################################################################
 def has_cataract(text):
     if "cataract" in text:
         return 1
@@ -38,4 +39,17 @@ print(len(left_cataract))
 right_cataract = df.loc[(df.C ==1) & (df.right_cataract == 1)]["Right-Fundus"].values
 print(len(right_cataract))
 #######################################################################################################
+print("Number of images in left cataract: {}".format(len(left_cataract)))
+print("Number of images in right cataract: {}".format(len(right_cataract)))
 
+left_normal = df.loc[(df.C ==0) & (df["Left-Diagnostic Keywords"] == "normal fundus")]["Left-Fundus"].sample(300,random_state=42).values
+right_normal = df.loc[(df.C ==0) & (df["Right-Diagnostic Keywords"] == "normal fundus")]["Right-Fundus"].sample(300,random_state=42).values
+right_normal[:15]
+print(len(left_normal), len(right_normal))
+
+cataract = np.concatenate((left_cataract,right_cataract),axis=0)
+normal = np.concatenate((left_normal,right_normal),axis=0)
+
+print(len(cataract),len(normal))
+
+#####################################################################################################
