@@ -151,3 +151,7 @@ model = tf.keras.models.Sequential([
 
 
 # train
+from tensorflow import keras
+model.compile(loss=keras.losses.BinaryCrossentropy(from_logits=True),
+              optimizer=keras.optimizers.RMSprop(learning_rate = .00001),
+              metrics=["accuracy"])
