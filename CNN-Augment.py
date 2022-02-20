@@ -183,3 +183,6 @@ def plot_accuracy_and_loss(train_model):
     ax[1].set_title('Training and validation loss')
     ax[1].legend()
     plt.show()
+
+# display graph
+plot_accuracy_and_loss(history)
