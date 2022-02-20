@@ -164,3 +164,11 @@ history = model.fit(x_train,y_train, steps_per_epoch=12, validation_data=(x_test
 loss,accuracy = model.evaluate(x_test,y_test)
 print("loss:",loss)
 print("Accuracy:",accuracy)
+
+# graph making
+def plot_accuracy_and_loss(train_model):
+    hist = history.history
+    acc = hist['accuracy']
+    val_acc = hist['val_accuracy']
+    loss = hist['loss']
+    val_loss = hist['val_loss']
