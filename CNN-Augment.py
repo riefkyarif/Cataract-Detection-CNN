@@ -155,3 +155,8 @@ from tensorflow import keras
 model.compile(loss=keras.losses.BinaryCrossentropy(from_logits=True),
               optimizer=keras.optimizers.RMSprop(learning_rate = .00001),
               metrics=["accuracy"])
+
+# fit model
+history = model.fit(x_train,y_train, steps_per_epoch=12, validation_data=(x_test,y_test), validation_steps=4, epochs=80)
+
+
