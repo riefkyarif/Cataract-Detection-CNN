@@ -160,3 +160,7 @@ model.compile(loss=keras.losses.BinaryCrossentropy(from_logits=True),
 history = model.fit(x_train,y_train, steps_per_epoch=12, validation_data=(x_test,y_test), validation_steps=4, epochs=80)
 
 
+# evaluate model
+loss,accuracy = model.evaluate(x_test,y_test)
+print("loss:",loss)
+print("Accuracy:",accuracy)
