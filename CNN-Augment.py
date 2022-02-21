@@ -189,3 +189,12 @@ plot_accuracy_and_loss(history)
 
 ##########################################################################
 #Fine tuning
+
+from tensorflow import keras
+inputs = keras.Input(shape=(224, 224, 3))
+# Separately from setting trainable on the model, we set training to False 
+x = vgg(inputs, training=False)
+x = keras.layers.GlobalAveragePooling2D()(x)
+# A Dense classifier with a single unit (binary classification)
+outputs = keras.layers.Dense(1)(x)
+model = keras.Model(inputs, outputs)
