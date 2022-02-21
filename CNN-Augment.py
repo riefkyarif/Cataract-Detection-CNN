@@ -186,3 +186,6 @@ def plot_accuracy_and_loss(train_model):
 
 # display graph
 plot_accuracy_and_loss(history)
+
+##########################################################################
+#Fine tuning
