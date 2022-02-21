@@ -198,3 +198,13 @@ x = keras.layers.GlobalAveragePooling2D()(x)
 # A Dense classifier with a single unit (binary classification)
 outputs = keras.layers.Dense(1)(x)
 model = keras.Model(inputs, outputs)
+
+# Unfreeze the base model
+vgg.trainable = True
+
+# It's important to recompile your model after you make any changes
+# to the `trainable` attribute of any inner layer, so that your changes
+# are taken into account
+model.compile(optimizer=keras.optimizers.RMSprop(learning_rate = .00001),  # Very low learning rate
+              loss=keras.losses.BinaryCrossentropy(from_logits=True),
+              metrics=["accuracy"])
